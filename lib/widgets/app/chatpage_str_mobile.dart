@@ -76,7 +76,7 @@ class ChatPageStructureMobile extends StatelessWidget {
                               CircleAvatar(
                                   radius: 13,
                                   backgroundColor:
-                                      const Color.fromARGB(255, 255, 255, 255),
+                                      Color.fromARGB(255, 197, 196, 196),
                                   child: Text(
                                     "₹",
                                     style: TextStyle(

@@ -1,8 +1,14 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:whatsaap/firebase_options.dart';
 import 'package:whatsaap/widgets/commonWidget/colors.dart';
 import 'package:whatsaap/responsive/responsiveLayout.dart';
 
-void main() {
+void main() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const MyApp());
 }
 

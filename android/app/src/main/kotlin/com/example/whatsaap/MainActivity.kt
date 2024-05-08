@@ -1,4 +1,4 @@
-package com.example.whatsaap
+package com.deep.whatsaap
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "550306316768",
+    "project_id": "whatsaapold",
+    "storage_bucket": "whatsaapold.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:550306316768:android:cf55739f8156b789ccab85",
+        "android_client_info": {
+          "package_name": "com.deep.whatsaap"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNcPZ1A1FWo0TwLGgRjnr5iZW7p98Hf6U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
