@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:whatsaap/screens/mobile_screen_layout.dart';
+import 'package:whatsaap/layoutScreens/mobile_screen_layout.dart';
 import 'package:whatsaap/widgets/commonWidget/colors.dart';
 import 'package:whatsaap/info.dart';
 import 'package:whatsaap/widgets/app/chatpage_str_mobile.dart';

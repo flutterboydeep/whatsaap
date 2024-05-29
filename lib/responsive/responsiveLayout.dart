@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:whatsaap/screens/mobile_screen_layout.dart';
-import 'package:whatsaap/screens/web_screen_layout.dart';
+import 'package:whatsaap/layoutScreens/mobile_screen_layout.dart';
+import 'package:whatsaap/layoutScreens/web_screen_layout.dart';
 
 class ResponsiveLayout extends StatelessWidget {
   const ResponsiveLayout({super.key});
