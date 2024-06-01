@@ -1,5 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:whatsaap/features/auth/auth_screens/otp_screen.dart';
+import 'package:whatsaap/features/auth/auth_screens/user_information_screen.dart';
 import 'package:whatsaap/features/landing/screens/landing_screen.dart';
 import 'package:whatsaap/firebase_options.dart';
 import 'package:whatsaap/router.dart';
@@ -20,27 +23,29 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Whatsaap',
-      theme: ThemeData.dark(
-        useMaterial3: true,
-      ).copyWith(
-        // textTheme: TextTheme(s),
-        // primaryColor: Color.fromRGBO(5, 188, 148, 1),
-        // colorScheme: ColorScheme.fromSeed(
-        // seedColor: const Color.fromARGB(255, 4, 48, 6),
-        // secondary: Color.fromRGBO(3, 32, 26, 1)),
-        // seedColor: Color.fromRGBO(2, 77, 61, 1),
-        appBarTheme: AppBarTheme(backgroundColor: appBarColor),
-        scaffoldBackgroundColor: backgroundColor,
-        iconButtonTheme: IconButtonThemeData(
-            style:
-                ButtonStyle(iconColor: MaterialStateProperty.all(Colors.grey))),
+    return ProviderScope(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Whatsaap',
+        theme: ThemeData.dark(
+          useMaterial3: true,
+        ).copyWith(
+          // textTheme: TextTheme(s),
+          // primaryColor: Color.fromRGBO(5, 188, 148, 1),
+          // colorScheme: ColorScheme.fromSeed(
+          // seedColor: const Color.fromARGB(255, 4, 48, 6),
+          // secondary: Color.fromRGBO(3, 32, 26, 1)),
+          // seedColor: Color.fromRGBO(2, 77, 61, 1),
+          appBarTheme: AppBarTheme(backgroundColor: appBarColor),
+          scaffoldBackgroundColor: backgroundColor,
+          iconButtonTheme: IconButtonThemeData(
+              style: ButtonStyle(
+                  iconColor: MaterialStateProperty.all(Colors.grey))),
+        ),
+        onGenerateRoute: (settings) => generateRoute(settings),
+        home: UserInformationScreen(),
+        // home: const ResponsiveLayout(),
       ),
-      onGenerateRoute: (settings) => generateRoute(settings),
-      home: LandingScreen(),
-      // home: const ResponsiveLayout(),
     );
   }
 }

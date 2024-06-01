@@ -1,20 +1,25 @@
+import 'dart:developer';
+
 import 'package:country_picker/country_picker.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:whatsaap/features/auth/controller/auth_controller.dart';
 
 import 'package:whatsaap/helper/custom_button.dart';
 import 'package:whatsaap/helper/text_helper.dart';
+import 'package:whatsaap/helper/utils/utils.dart';
 import 'package:whatsaap/widgets/commonWidget/colors.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   static const routeName = '/logins-screen';
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   TextEditingController phoneCtrl = TextEditingController();
   Country? country;
   @override
@@ -57,17 +62,22 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     // if (country != null)
                     TextHelper(
-                      text: country == null ? '+91' : '+${country!.phoneCode}',
+                      text: country?.phoneCode == null
+                          ? ''
+                          : "+${country!.phoneCode}",
                       fontSize: 20,
                     ),
                     SizedBox(width: 10),
                     Expanded(
                       child: TextField(
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(fontSize: 25, letterSpacing: 7),
                         maxLength: 10,
                         keyboardType: TextInputType.number,
                         controller: phoneCtrl,
-                        decoration: InputDecoration(hintText: "Phone number"),
+                        decoration: InputDecoration(
+                          hintText: "Phone number",
+                          hintStyle: TextStyle(letterSpacing: 1, fontSize: 20),
+                        ),
                       ),
                     ),
                   ],
@@ -80,7 +90,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 50,
                     width: 100,
                     child: CustomButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        sendPhoneNumber();
+                      },
                       text: "Next",
                       textcolor: Colors.black,
                     )),
@@ -100,5 +112,28 @@ class _LoginScreenState extends State<LoginScreen> {
             country = _country;
           });
         });
+  }
+
+  void sendPhoneNumber() {
+    String phoneNumber = phoneCtrl.text.trim();
+    if (country != null && phoneNumber.isNotEmpty) {
+      if (phoneNumber.characters.length == 10) {
+        try {
+          ref
+              .read(authControllerProvider)
+              .signInWithPhone(context, '+${country!.phoneCode}$phoneNumber');
+          log("Data send sucessfully");
+        } catch (e) {
+          log("error is $e");
+        }
+      } else {
+        showSnackBar(
+            context: context, content: "Please Enter valid Phone Number");
+      }
+    } else if (country == null) {
+      showSnackBar(context: context, content: "Please pick your Country");
+    } else {
+      showSnackBar(context: context, content: "Enter your phone number");
+    }
   }
 }
