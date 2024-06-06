@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -19,9 +21,10 @@ class AuthRepository {
     required this.firestore,
   });
 
-  void signInWithPhone(BuildContext context, String phoneNumber) async {
+  void signInWithPhone(BuildContext context, String userphoneNumber) async {
     try {
       auth.verifyPhoneNumber(
+          phoneNumber: userphoneNumber,
           verificationCompleted:
               (PhoneAuthCredential phoneAuthCredential) async {
             await auth.signInWithCredential(phoneAuthCredential);
@@ -35,6 +38,7 @@ class AuthRepository {
           },
           codeAutoRetrievalTimeout: (String verifcationId) {});
     } on FirebaseAuthException catch (e) {
+      log("Phone message error  is $e");
       showSnackBar(context: context, content: e.message!);
     }
   }

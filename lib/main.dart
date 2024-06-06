@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:whatsaap/features/auth/auth_screens/dummyMap.dart';
 import 'package:whatsaap/features/auth/auth_screens/otp_screen.dart';
 import 'package:whatsaap/features/auth/auth_screens/user_information_screen.dart';
 import 'package:whatsaap/features/landing/screens/landing_screen.dart';
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
                   iconColor: MaterialStateProperty.all(Colors.grey))),
         ),
         onGenerateRoute: (settings) => generateRoute(settings),
-        home: UserInformationScreen(),
+        home: LandingScreen(),
         // home: const ResponsiveLayout(),
       ),
     );

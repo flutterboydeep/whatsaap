@@ -122,7 +122,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           ref
               .read(authControllerProvider)
               .signInWithPhone(context, '+${country!.phoneCode}$phoneNumber');
-          log("Data send sucessfully");
+          log("Data send sucessfully  +${country!.phoneCode}$phoneNumber");
         } catch (e) {
           log("error is $e");
         }
