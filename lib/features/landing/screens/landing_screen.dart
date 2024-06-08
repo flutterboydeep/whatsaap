@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:whatsaap/features/auth/auth_screens/login_screen.dart';
-import 'package:whatsaap/helper/custom_button.dart';
+import 'package:whatsaap/helper/helperClasses/custom_button.dart';
 
 import 'package:whatsaap/widgets/commonWidget/colors.dart';
 

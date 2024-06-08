@@ -44,7 +44,8 @@ class MyApp extends StatelessWidget {
                   iconColor: MaterialStateProperty.all(Colors.grey))),
         ),
         onGenerateRoute: (settings) => generateRoute(settings),
-        home: LandingScreen(),
+        home: UserInformationScreen(),
+        // home: LandingScreen(),
         // home: const ResponsiveLayout(),
       ),
     );

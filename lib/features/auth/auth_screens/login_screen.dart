@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:whatsaap/features/auth/controller/auth_controller.dart';
 
-import 'package:whatsaap/helper/custom_button.dart';
-import 'package:whatsaap/helper/text_helper.dart';
+import 'package:whatsaap/helper/helperClasses/custom_button.dart';
+import 'package:whatsaap/helper/helperClasses/text_helper.dart';
 import 'package:whatsaap/helper/utils/utils.dart';
 import 'package:whatsaap/widgets/commonWidget/colors.dart';
 

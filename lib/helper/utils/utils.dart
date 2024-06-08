@@ -18,5 +18,6 @@ Future<File?> pickImageFromGallery(BuildContext context) async {
   } catch (e) {
     showSnackBar(context: context, content: "error is $e");
   }
+
   return image;
 }
