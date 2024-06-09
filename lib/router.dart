@@ -19,6 +19,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case UserInformationScreen.routeName:
       return MaterialPageRoute(builder: (context) => UserInformationScreen());
     default:
-      return MaterialPageRoute(builder: (context) => ErrorScreen());
+      return MaterialPageRoute(
+          builder: (context) => ErrorScreen(
+                error: "This page does't",
+              ));
   }
 }
