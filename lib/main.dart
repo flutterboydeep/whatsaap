@@ -1,17 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:whatsaap/features/auth/auth_screens/dummyMap.dart';
-import 'package:whatsaap/features/auth/auth_screens/otp_screen.dart';
-import 'package:whatsaap/features/auth/auth_screens/user_information_screen.dart';
 import 'package:whatsaap/features/auth/controller/auth_controller.dart';
-import 'package:whatsaap/features/landing/screens/landing_screen.dart';
+
 import 'package:whatsaap/firebase_options.dart';
 import 'package:whatsaap/helper/helperClasses/loader.dart';
 import 'package:whatsaap/layoutScreens/mobile_screen_layout.dart';
 import 'package:whatsaap/router.dart';
 import 'package:whatsaap/widgets/commonWidget/colors.dart';
-import 'package:whatsaap/responsive/responsiveLayout.dart';
+
 import 'package:whatsaap/widgets/error_screen.dart';
 
 void main() async {
@@ -49,9 +46,10 @@ class MyApp extends ConsumerWidget {
       onGenerateRoute: (settings) => generateRoute(settings),
       home: ref.watch(userDataAuthProvider).when(data: (user) {
         if (user == null) {
+          // return const LandingScreen();
           return const MobileScreenLayout();
         } else {
-          return const LandingScreen();
+          return const MobileScreenLayout();
         }
       }, error: (err, trace) {
         return ErrorScreen(

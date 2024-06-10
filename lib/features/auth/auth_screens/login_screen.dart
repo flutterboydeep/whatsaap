@@ -11,6 +11,10 @@ import 'package:whatsaap/helper/helperClasses/text_helper.dart';
 import 'package:whatsaap/helper/utils/utils.dart';
 import 'package:whatsaap/widgets/commonWidget/colors.dart';
 
+final numberCodeStateProvider = StateProvider<String>((ref) {
+  return "+91";
+});
+
 class LoginScreen extends ConsumerStatefulWidget {
   static const routeName = '/logins-screen';
   const LoginScreen({super.key});
@@ -119,6 +123,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     if (country != null && phoneNumber.isNotEmpty) {
       if (phoneNumber.characters.length == 10) {
         try {
+          ref.read(numberCodeStateProvider.notifier).state =
+              '+${country!.phoneCode}';
           ref
               .read(authControllerProvider)
               .signInWithPhone(context, '+${country!.phoneCode}$phoneNumber');

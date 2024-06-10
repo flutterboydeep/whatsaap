@@ -8,6 +8,7 @@ import 'package:whatsaap/widgets/commonWidget/contacts_list.dart';
 import 'package:whatsaap/widgets/commonWidget/send_message_box.dart';
 
 class ChatPageStructureMobile extends StatelessWidget {
+  static const String routeName = '/moblile-chat-page';
   const ChatPageStructureMobile({super.key});
 
   @override
