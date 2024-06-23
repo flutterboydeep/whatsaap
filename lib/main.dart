@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:whatsaap/features/auth/controller/auth_controller.dart';
+import 'package:whatsaap/features/landing/screens/landing_screen.dart';
 
 import 'package:whatsaap/firebase_options.dart';
 import 'package:whatsaap/helper/helperClasses/loader.dart';
@@ -46,9 +47,10 @@ class MyApp extends ConsumerWidget {
       onGenerateRoute: (settings) => generateRoute(settings),
       home: ref.watch(userDataAuthProvider).when(data: (user) {
         if (user == null) {
-          // return const LandingScreen();
-          return const MobileScreenLayout();
+          // return const MobileScreenLayout();
+          return const LandingScreen();
         } else {
+          // return const MobileScreenLayout();
           return const MobileScreenLayout();
         }
       }, error: (err, trace) {

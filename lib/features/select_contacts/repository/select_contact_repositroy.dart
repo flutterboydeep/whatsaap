@@ -7,8 +7,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:whatsaap/helper/utils/utils.dart';
 import 'package:whatsaap/layoutScreens/mobile_screen_layout.dart';
 import 'package:whatsaap/models/user_model.dart';
-import 'package:whatsaap/widgets/app/chatpage_str_mobile.dart';
-import 'package:whatsaap/widgets/commonWidget/chat_list.dart';
+import 'package:whatsaap/features/chat/screen/chatpage_str_mobile.dart';
+import 'package:whatsaap/features/chat/widgets/chat_list.dart';
 
 final selectContactRepositoryProvider = Provider(
     (ref) => SelectContactRepository(firestore: FirebaseFirestore.instance));

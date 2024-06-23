@@ -27,6 +27,7 @@ class LandingScreen extends StatelessWidget {
               children: [
                 const Text(
                   "Welcome to WhatsApp",
+                  textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
                 ConstrainedBox(

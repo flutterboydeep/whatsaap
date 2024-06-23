@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:whatsaap/widgets/commonWidget/colors.dart';
-import 'package:whatsaap/widgets/commonWidget/chat_list.dart';
-import 'package:whatsaap/widgets/commonWidget/contacts_list.dart';
+import 'package:whatsaap/features/chat/widgets/chat_list.dart';
+import 'package:whatsaap/features/chat/widgets/contacts_list.dart';
 import 'package:whatsaap/widgets/commonWidget/send_message_box.dart';
 import 'package:whatsaap/widgets/web/web_chat_appBar.dart';
 import 'package:whatsaap/widgets/web/web_profileBar.dart';
@@ -48,7 +48,10 @@ class WebScreenLayout extends StatelessWidget {
             child: Column(
               children: [
                 WebChatAppBar(),
-                Expanded(child: ChatList()),
+                Expanded(
+                    child: ChatList(
+                  recieverUserId: '',
+                )),
                 Container(
                   height: MediaQuery.of(context).size.height * 0.08,
                   padding: EdgeInsets.all(10),
