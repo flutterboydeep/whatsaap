@@ -40,7 +40,7 @@ class ChatPageStructureMobile extends ConsumerWidget {
                   children: [
                     Text(name),
                     Text(
-                      snapshot.data!.isOnline ? "online" : "offline",
+                      snapshot.data!.isOnline ? "Online" : "Offline",
                       style: TextStyle(fontSize: 13),
                     ),
                   ],
