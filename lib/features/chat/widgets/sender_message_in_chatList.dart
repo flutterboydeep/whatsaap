@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:whatsaap/enums/message_enum.dart';
+import 'package:whatsaap/features/chat/widgets/display_text_image_gif.dart';
 import 'package:whatsaap/widgets/commonWidget/colors.dart';
 
 class SenderMessageInChatList extends StatelessWidget {
   final String message;
   final String date;
+  final MessageEnum type;
 
   const SenderMessageInChatList(
-      {super.key, required this.message, required this.date});
+      {super.key,
+      required this.message,
+      required this.date,
+      required this.type});
 
   @override
   Widget build(BuildContext context) {
@@ -31,11 +37,14 @@ class SenderMessageInChatList extends StatelessWidget {
               child: Stack(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(
-                        left: 10, right: 30, top: 5, bottom: 20),
-                    child: Text(
-                      message,
-                      style: TextStyle(fontSize: 16),
+                    padding: type == MessageEnum.text
+                        ? EdgeInsets.only(
+                            left: 10, right: 30, top: 5, bottom: 20)
+                        : EdgeInsets.only(
+                            left: 5, right: 5, top: 5, bottom: 25),
+                    child: DisplayTextImageGif(
+                      message: message,
+                      type: type,
                     ),
                   ),
                   Positioned(

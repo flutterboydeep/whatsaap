@@ -1,8 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:developer';
+
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:whatsaap/enums/message_enum.dart';
 import 'package:whatsaap/features/auth/controller/auth_controller.dart';
 
 import 'package:whatsaap/features/chat/repositiory/chat_repo.dart';
@@ -39,6 +41,24 @@ class ChatController {
               text: text,
               recieverUserId: recieverUserId,
               senderUser: value!),
+        );
+  }
+
+  void sendFileMessage(
+    BuildContext context,
+    File file,
+    String recieverUserId,
+    MessageEnum messageEnum,
+  ) {
+    ref.read(userDataAuthProvider).whenData(
+          (value) => chatRepository.sendFileMessage(
+            context: context,
+            file: file,
+            recieverUserId: recieverUserId,
+            senderUserData: value!,
+            messageEnum: messageEnum,
+            ref: ref,
+          ),
         );
   }
 }

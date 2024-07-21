@@ -47,7 +47,16 @@ dependencies:
   flutter_contacts: ^1.1.8
   uuid: ^4.4.0
   intl: ^0.19.0
-
+  cached_network_image: ^3.3.1
+  emoji_picker_flutter: ^2.2.0
+  #cached_video_player: ^2.0.4
+  # video_player: ^2.9.0
+  # cached_video_player: ^2.0.4
+dependency_overrides:
+  cached_video_player:
+    git:
+      url: https://github.com/vikram25897/flutter_cached_video_player
+      ref: feature/gradle_version_bump
 dev_dependencies:
   flutter_test:
     sdk: flutter

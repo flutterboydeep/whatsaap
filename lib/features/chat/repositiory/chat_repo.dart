@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
+import 'dart:async';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,11 +10,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 import 'package:whatsaap/enums/message_enum.dart';
+import 'package:whatsaap/features/chat/controller/chat_controller.dart';
 import 'package:whatsaap/helper/utils/utils.dart';
 import 'package:whatsaap/info.dart';
 import 'package:whatsaap/models/chat_contact.dart';
 import 'package:whatsaap/models/message.dart';
 import 'package:whatsaap/models/user_model.dart';
+import 'package:whatsaap/repo_firebase/common_firebase_storage.dart';
 
 final chatRepositoryProvider = Provider((ref) => ChatRepository(
     firestore: FirebaseFirestore.instance, auth: FirebaseAuth.instance));
@@ -35,6 +39,8 @@ class ChatRepository {
       List<ChatContacts> contacts = [];
       for (var document in event.docs) {
         var chatContact = ChatContacts.fromMap(document.data());
+        log("this is receiver user id is  hello= ${chatContact.contactId}");
+
         var userData = await firestore
             .collection('users')
             .doc(chatContact.contactId)
@@ -89,6 +95,8 @@ class ChatRepository {
         .collection('chats')
         .doc(auth.currentUser!.uid)
         .set(recieverChatContact.toMap());
+    log("this is receiver user id in contact subcollection =${recieverUserId}");
+    log("this is current user id in contact subcollection =${auth.currentUser!.uid}");
 
     var senderChatContact = ChatContacts(
         name: recieverUserData.name,
@@ -123,9 +131,12 @@ class ChatRepository {
       messageId: messageId,
       isSeen: false,
     );
-    log("_saveMessageToMessageSubCollection run");
 
     //      users  -->Sender id -->reciever id --> chat_collecetion--->chat_id  ---> message_collection-->message_id--->all messages
+
+    // this part is is do Your send_message showing to you
+    // but message has send to reciever user and it will be showing to reciever user becasue lower part is enabled
+
     await firestore
         .collection('users')
         .doc(auth.currentUser!.uid)
@@ -137,9 +148,13 @@ class ChatRepository {
 
     //  long form : users  -->  reciever_id -->  sender_id --> chat_collecetion--->  chat_id  ---> message_collection-->message_id--->all messages
     //  short form on firebase:   user -->reciever id --> sender id -->messages -->message id -->messagess
+
+    // this part is is do Your send_message showing to reciever user
+    // mean message send_message showing me but message has not send to reciever user
+
     await firestore
         .collection('users')
-        .doc(recieverUserId)
+        .doc(recieverUserId) //show the our chat to receiver user
         .collection('chats')
         .doc(auth.currentUser!.uid)
         .collection('messages')
@@ -177,6 +192,63 @@ class ChatRepository {
           messageType: MessageEnum.text);
     } catch (e) {
       log("error $e");
+      showSnackBar(context: context, content: e.toString());
+    }
+  }
+
+  // sending image file feature
+
+  void sendFileMessage({
+    required BuildContext context,
+    required File file,
+    required String recieverUserId,
+    required UserModel senderUserData,
+    required ProviderRef ref,
+    required MessageEnum messageEnum,
+  }) async {
+    try {
+      var timeSent = DateTime.now();
+      var messageId = const Uuid().v1();
+      String imageUrl = await ref
+          .read(commonFirebaseStroageRepositoryProvider)
+          .storeFileToFirebase(
+            'chat/${messageEnum.type}/${senderUserData.uid}/$recieverUserId/$messageId',
+            file,
+          );
+      UserModel recieverUserData;
+      var userDataMap =
+          await firestore.collection('users').doc(recieverUserId).get();
+      recieverUserData = UserModel.fromMap(userDataMap.data()!);
+
+      String contactMsg;
+      switch (messageEnum) {
+        case MessageEnum.image:
+          contactMsg = '📷 image';
+          break;
+        case MessageEnum.video:
+          contactMsg = '📽 video';
+          break;
+        case MessageEnum.auido:
+          contactMsg = '🎵 auido';
+          break;
+        case MessageEnum.gif:
+          contactMsg = '📦 Gif';
+          break;
+        default:
+          contactMsg = '📦 Gif';
+      }
+      _saveDataToContactsSubCollection(senderUserData, recieverUserData,
+          contactMsg, timeSent, recieverUserId);
+
+      _saveMessageToMessageSubCollection(
+          recieverUserId: recieverUserId,
+          text: imageUrl,
+          timeSent: timeSent,
+          messageId: messageId,
+          username: senderUserData.name,
+          reciverUsername: recieverUserData.name,
+          messageType: messageEnum);
+    } catch (e) {
       showSnackBar(context: context, content: e.toString());
     }
   }

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:whatsaap/helper/utils/utils.dart';
-import 'package:whatsaap/layoutScreens/mobile_screen_layout.dart';
+
 import 'package:whatsaap/models/user_model.dart';
 import 'package:whatsaap/features/chat/screen/chatpage_str_mobile.dart';
 import 'package:whatsaap/features/chat/widgets/chat_list.dart';
@@ -23,7 +23,8 @@ class SelectContactRepository {
     List<Contact> contacts = [];
     try {
       if (await FlutterContacts.requestPermission()) {
-        contacts = await FlutterContacts.getContacts(withProperties: true);
+        contacts = await FlutterContacts.getContacts(
+            withProperties: true, withPhoto: true);
       }
     } catch (e) {
       log(e.toString());

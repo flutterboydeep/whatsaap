@@ -54,6 +54,7 @@ class _ChatListState extends ConsumerState<ChatList> {
                   FirebaseAuth.instance.currentUser!.uid) {
                 return MyMessageInChatList(
                   message: messageData.text,
+                  type: messageData.type,
                   // message: messages[index]['text'].toString(),
                   // date: messages[index]['time'].toString(),
                   date: timeSend,
@@ -61,6 +62,7 @@ class _ChatListState extends ConsumerState<ChatList> {
               } else {
                 return SenderMessageInChatList(
                   message: messageData.text,
+                  type: messageData.type,
                   // message: messages[index]['text'].toString(),
                   // date: messages[index]['time'].toString(),
                   date: timeSend,
