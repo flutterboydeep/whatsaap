@@ -286,6 +286,12 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
     });
   }
 
+  void falseEmojiSearchingValue() {
+    setState(() {
+      isEmojiSearching = false;
+    });
+  }
+
   void showKeyboard() => focusNode.requestFocus();
   void hideKeyboard() => focusNode.unfocus();
   void toggleEmojiKeyboardContainer() {
@@ -293,9 +299,7 @@ class _BottomChatFieldState extends ConsumerState<BottomChatField> {
       showKeyboard();
       hideEmojiContainer();
     } else {
-      setState(() {
-        isEmojiSearching = false;
-      });
+      falseEmojiSearchingValue();
       hideKeyboard();
       showEmojiContainer();
     }
